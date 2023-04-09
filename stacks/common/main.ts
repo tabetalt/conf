@@ -7,6 +7,14 @@ import './google/identity-pool';
 import './kubernetes/ingress-controller';
 import './kubernetes/postgres-operator';
 import './repositories-with-containers';
+import * as config from './config';
+import * as artifactRegistry from './google/artifact-registry';
+import { zone } from './google/dns/zone';
 import { cluster } from './google/gke';
+import { ipAddress } from './google/ip-address';
 
 export const kubeconfig = pulumi.secret(cluster.getKubeconfig());
+export const rootDomain = config.rootDomain;
+export const artifactRepoUrl = artifactRegistry.artifactRepoUrl;
+export const zoneName = zone.name;
+export const ingressIpAddress = ipAddress.address;

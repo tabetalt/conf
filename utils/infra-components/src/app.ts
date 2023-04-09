@@ -1,5 +1,6 @@
 import * as k8s from '@pulumi/kubernetes';
 import * as pulumi from '@pulumi/pulumi';
+import { interpolate } from '@pulumi/pulumi';
 
 export interface AppComponentArgs {
   image: pulumi.Input<string>;
@@ -33,6 +34,11 @@ export interface AppComponentArgs {
    * @default info
    */
   logLevel?: pulumi.Input<string>;
+
+  /**
+   * Resources
+   */
+  resources: pulumi.Input<k8s.types.input.core.v1.ResourceRequirements>;
 }
 
 export class AppComponent extends pulumi.ComponentResource {
@@ -56,6 +62,7 @@ export class AppComponent extends pulumi.ComponentResource {
       tag = 'latest',
       logLevel = 'info',
       port = 8000,
+      resources,
     } = args;
 
     const matchLabels = { app: name };
@@ -73,7 +80,8 @@ export class AppComponent extends pulumi.ComponentResource {
               containers: [
                 {
                   name: 'api',
-                  image: `${image}:${tag}`,
+                  resources,
+                  image: interpolate`${image}:${tag}`,
                   imagePullPolicy: 'IfNotPresent',
                   ports: [{ containerPort: port }],
                   envFrom,

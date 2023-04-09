@@ -6,3 +6,6 @@ config:
   pulumi:disable-default-providers: ['*']
   google:cluster-id: tabetalt-main
   google:cluster-location: europe-north1
+  google:region: europe-north1
+  google:zone: europe-north1-a
+  google:projectId: tabetalt-main-app
