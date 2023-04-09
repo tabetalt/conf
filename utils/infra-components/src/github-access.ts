@@ -35,7 +35,7 @@ export class GitHubAccess extends pulumi.ComponentResource {
     args: GitHubAccessArgs,
     opts?: pulumi.ComponentResourceOptions,
   ) {
-    super('flexisoft:github:access', name, args, opts);
+    super('tabetalt:github:access', name, args, opts);
 
     const { identityPoolName, identityPoolProviderName, repositories } = args;
 

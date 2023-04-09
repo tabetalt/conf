@@ -2,4 +2,4 @@ secretsprovider: gcpkms://projects/tabetalt-core/locations/europe-west1/keyRings
 encryptedkey: CiQAXkeO2t3jO/ixg7UGU+ZsqsHHZJwHwv/OPv2/JF1ERv9+cX4SSQBtQrpOahMAmrX0j4CDB4evlun8J9a6uSYzZB1DZrxO9lhbfJR+yZ6e8fUYCrxHf0Nb2qtwjTyKkavtrqaNVRo8Duv363zDLtM=
 config:
   api-v2:sub-domain: api
-  api-v2:tag: main-602102f
+  api-v2:tag: main-d39decc

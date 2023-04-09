@@ -1,8 +1,12 @@
 secretsprovider: gcpkms://projects/tabetalt-core/locations/europe-west1/keyRings/core-keyring-272b395/cryptoKeys/core-cryptokey-0b01d88
 encryptedkey: CiQAXkeO2lSUjufwVOF38hMGCDFTEXuRofZ2UlbVfbduhn+Ro0cSSQBtQrpOem3NM3S+fI8fMEj1JhtOESEtPdDeTWMOMbbAIjASnpsLA07W2CuQ9YVurJFbnjVaEUfoHxkunv10vl142XytgT+pCoQ=
 config:
+  common:admins:
+    - group:gcp-administrators@tabetalt.no
   common:certificate-email:
     secure: v1:PqnXJ2JrUXQNtrO7:Zr3AH3E/tCxUJcJhDkpdkMGssjK9Ne3xAkTrIHc1E0RMzQ==
+  common:developers:
+    - group:utvikler@tabetalt.no
   common:root-domain: tabetalt.no
   github:owner: tabetalt
   github:token:

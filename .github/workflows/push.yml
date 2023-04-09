@@ -1,0 +1,80 @@
+name: On Push
+
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  apply-changes:
+    name: Apply ${{ matrix.stack }}
+
+    runs-on: ubuntu-latest
+
+    concurrency: pulumi-${{ matrix.stack }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - path: stacks/app
+            stack: app-prod
+            refresh: false
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm 📦
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.22.0
+
+      - name: Authenticate with Google 🔑
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider:
+            ${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+
+      - uses: cobraz/setup-gke-gcloud-auth-plugin@v1
+
+      - name: Use Node LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm lint
+
+      - uses: pulumi/actions@v4
+        env:
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+        with:
+          command: up
+          refresh: ${{ matrix.refresh }}
+          stack-name: ${{ matrix.stack }}
+          work-dir: ${{ matrix.path }}
+
+  todo-to-issue:
+    name: Create issue from TODO comments
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
+
+      - name: Create issue from TODO comments 📝
+        uses: derjuulsn/todo-issue@main
+        with:
+          excludePattern: '^(node_modules/)'
+          label: needs-refinement
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAYTRON_GITHUB_TOKEN }}

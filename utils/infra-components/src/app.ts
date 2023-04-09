@@ -39,6 +39,10 @@ export interface AppComponentArgs {
    * Resources
    */
   resources: pulumi.Input<k8s.types.input.core.v1.ResourceRequirements>;
+
+  healthCheck?: pulumi.Input<k8s.types.input.core.v1.Probe>;
+
+  replicas?: pulumi.Input<number>;
 }
 
 export class AppComponent extends pulumi.ComponentResource {
@@ -63,6 +67,15 @@ export class AppComponent extends pulumi.ComponentResource {
       logLevel = 'info',
       port = 8000,
       resources,
+      replicas = 1,
+      healthCheck = {
+        httpGet: {
+          path: '/health',
+          port,
+        },
+        initialDelaySeconds: 5,
+        periodSeconds: 5,
+      },
     } = args;
 
     const matchLabels = { app: name };
@@ -72,19 +85,22 @@ export class AppComponent extends pulumi.ComponentResource {
       {
         metadata: { name },
         spec: {
-          replicas: 1,
+          replicas,
           selector: { matchLabels },
           template: {
             metadata: { labels: matchLabels },
             spec: {
               containers: [
                 {
-                  name: 'api',
+                  readinessProbe: healthCheck,
+                  livenessProbe: healthCheck,
+                  name,
                   resources,
                   image: interpolate`${image}:${tag}`,
                   imagePullPolicy: 'IfNotPresent',
                   ports: [{ containerPort: port }],
                   envFrom,
+
                   env: pulumi.output(env).apply(_env => [
                     {
                       name: 'PORT',
@@ -102,7 +118,7 @@ export class AppComponent extends pulumi.ComponentResource {
           },
         },
       },
-      { parent: this },
+      { parent: this, deleteBeforeReplace: true },
     );
 
     this.service = new k8s.core.v1.Service(
@@ -114,7 +130,7 @@ export class AppComponent extends pulumi.ComponentResource {
           selector: this.deployment.spec.selector.matchLabels,
         },
       },
-      { parent: this },
+      { parent: this, deleteBeforeReplace: true },
     );
 
     if (host) {
@@ -149,7 +165,7 @@ export class AppComponent extends pulumi.ComponentResource {
             ],
           },
         },
-        { parent: this },
+        { parent: this, deleteBeforeReplace: true },
       );
     }
   }
