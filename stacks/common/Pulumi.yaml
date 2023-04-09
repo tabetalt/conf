@@ -1,0 +1,11 @@
+name: tabetalt-common
+runtime: nodejs
+backend:
+  url: gs://tabetalt-pulumi/conf
+config:
+  pulumi:disable-default-providers: ['*']
+  google:organization-id: 165988965380
+  google:billing-account-id: 017BA7-58F088-B0D3F3
+  google:region: europe-north1
+  google:zone: europe-north1-a
+  gcp:project: this-project-id-should-not-be-applied

@@ -1,0 +1,8 @@
+name: tabetalt-app
+runtime: nodejs
+backend:
+  url: gs://tabetalt-pulumi/conf
+config:
+  pulumi:disable-default-providers: ['*']
+  google:cluster-id: tabetalt-main
+  google:cluster-location: europe-north1

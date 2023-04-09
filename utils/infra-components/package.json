@@ -1,0 +1,17 @@
+{
+  "name": "@tabetalt/infra-components",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@pulumi/github": "^5.7.0",
+    "@pulumi/gcp": "^6.0.0",
+    "@pulumi/kubernetes": "^3.24.3",
+    "@pulumi/google-native": "^0.28.0",
+    "@pulumi/pulumi": "^3.0.0"
+  },
+  "exports": "./dist/main.js",
+  "types": "./dist/main.d.ts"
+}

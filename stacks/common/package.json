@@ -1,0 +1,14 @@
+{
+  "name": "@tabetalt/stack-common",
+  "version": "0.0.0",
+  "main": "main.ts",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@pulumi/gcp": "^6.0.0",
+    "@pulumi/github": "^5.7.0",
+    "@pulumi/google-native": "^0.28.0",
+    "@pulumi/kubernetes": "^3.24.3",
+    "@pulumi/pulumi": "^3.0.0",
+    "@tabetalt/infra-components": "workspace:*"
+  }
+}

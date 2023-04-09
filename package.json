@@ -1,0 +1,24 @@
+{
+  "name": "@tabetalt/conf",
+  "version": "0.0.0",
+  "description": "Common configuration for Tabetalt",
+  "author": "Tabetalt.no AS",
+  "license": "Apache-2.0",
+  "prettier": "@cobraz/prettier",
+  "scripts": {
+    "build": "turbo build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "devDependencies": {
+    "@bjerk/eslint-config": "^3.1.0",
+    "@cobraz/prettier": "^2.0.1",
+    "@tsconfig/node-lts": "^18.12.1",
+    "@types/node": "^16",
+    "eslint": "8.37.0",
+    "prettier": "^2.8.7",
+    "turbo": "^1.8.8",
+    "typescript": "^5.0.4"
+  }
+}
