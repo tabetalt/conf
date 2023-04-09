@@ -95,6 +95,8 @@ export class GitHubAccess extends pulumi.ComponentResource {
             { parent: this, deleteBeforeReplace: true },
           );
 
+          // TODO: Replace this with native provider once IamMembers are fixed in google-native
+          // @see https://github.com/pulumi/pulumi-google-native/issues/836
           new gcp.serviceaccount.IAMMember(
             `${name}-core-iam-service-${owner}-${repository}`,
             {
@@ -105,6 +107,8 @@ export class GitHubAccess extends pulumi.ComponentResource {
             { parent: this, deleteBeforeReplace: true },
           );
 
+          // TODO: Replace this with native provider once IamMembers are fixed in google-native
+          // @see https://github.com/pulumi/pulumi-google-native/issues/836
           new gcp.serviceaccount.IAMMember(
             `${name}-core-iam-service-token-${owner}-${repository}`,
             {
