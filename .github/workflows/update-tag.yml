@@ -28,6 +28,13 @@ jobs:
 
       - run: echo ${{ steps.inputs.outputs.payload }}
 
+      - name: Authenticate with Google 🔑
+        uses: google-github-actions/auth@v0
+        with:
+          workload_identity_provider:
+            ${{ secrets.GOOGLE_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GOOGLE_SERVICE_ACCOUNT }}
+
       - uses: cobraz/pulumi-config@v2
         id: config
         env:
