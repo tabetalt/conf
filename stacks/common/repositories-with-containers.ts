@@ -1,6 +1,7 @@
-import { GitHubAccess } from '@tabetalt/infra-components';
-import * as github from '@pulumi/github';
 import * as gcp from '@pulumi/gcp';
+import * as github from '@pulumi/github';
+import { interpolate } from '@pulumi/pulumi';
+import { GitHubAccess } from '@tabetalt/infra-components';
 import { provider as githubProvider } from './github/provider';
 import {
   artifactRepoUrl,
@@ -11,7 +12,6 @@ import {
   provider as googleProvider,
   legacyProvider as legacyGoogleProvider,
 } from './google/provider';
-import { interpolate } from '@pulumi/pulumi';
 
 const repositoryWithContainer = ['api-v2', 'backoffice-v2'];
 

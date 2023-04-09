@@ -1,6 +1,6 @@
-import * as google from '@pulumi/google-native';
 import * as gcp from '@pulumi/gcp';
 import * as github from '@pulumi/github';
+import * as google from '@pulumi/google-native';
 import * as pulumi from '@pulumi/pulumi';
 import { interpolate } from '@pulumi/pulumi';
 

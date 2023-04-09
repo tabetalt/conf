@@ -1,5 +1,5 @@
-import * as google from '@pulumi/google-native';
 import * as gcp from '@pulumi/gcp';
+import * as google from '@pulumi/google-native';
 import { region, zone } from './config';
 import { apiServices, project } from './project';
 
