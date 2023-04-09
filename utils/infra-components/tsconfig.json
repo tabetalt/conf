@@ -3,9 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "declaration": true,
-    "inlineSourceMap": true,
+    "inlineSourceMap": true
   },
-  "files": [
-    "src/main.ts"
-  ]
+  "files": ["src/main.ts"]
 }

@@ -1,6 +1,6 @@
 import * as gcp from '@pulumi/gcp';
 import { legacyProvider } from './provider';
-  
+
 export const identityPool = new gcp.iam.WorkloadIdentityPool(
   'main-identity-pool',
   {

@@ -39,11 +39,7 @@ export class DatabaseComponent extends pulumi.ComponentResource {
 
     const crd = 'acid.zalan.do';
 
-    const {
-      username = name,
-      database = name,
-      team = 'ward',
-    } = args || {};
+    const { username = name, database = name, team = 'ward' } = args || {};
 
     this.cluster = new k8s.apiextensions.CustomResource(
       name,
