@@ -2,7 +2,7 @@ import * as google from '@pulumi/google-native';
 import * as pulumi from '@pulumi/pulumi';
 
 export interface DomainRecord {
-  type: 'CNAME' | 'TXT' | 'A' | 'MX';
+  type: 'CNAME' | 'TXT' | 'A' | 'AAAA' | 'MX';
   name: pulumi.Input<string>;
   data: pulumi.Input<string>[];
 }
